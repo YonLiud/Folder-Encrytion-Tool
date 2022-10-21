@@ -1,10 +1,9 @@
 import tarfile
 import sys
 
-path = sys.argv[1] # path to target file
-
-file = tarfile.open(path)
-
-file.extractall("./" + path[-1].split('.')[0])
-  
-file.close()
+def extract_tarfile(path):
+    print('Extracting files...')
+    print(path)
+    tar = tarfile.open(path, "r:gz")
+    tar.extractall(path[:-7])
+    tar.close()

@@ -1,7 +1,10 @@
 import sys
 import os
 from cryptography.fernet import Fernet
+from numpy import extract
+from extract_tarfile import extract_tarfile as et
 
+print('Decrypting files...')
 
 cmdargs = sys.argv # cmd arguments ( path to target folder, path to key file )
 
@@ -17,3 +20,11 @@ decrypted = fkey.decrypt(data)
 with open(path, 'wb') as f:
     f.write(decrypted)
 
+print('Decompressing files...')
+
+et(path)
+
+print('Done! \nDecrypted files are in ' + path[:-7])
+
+# delete archive
+os.remove(path)
