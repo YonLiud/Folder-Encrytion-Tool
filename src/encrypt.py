@@ -19,8 +19,6 @@ if not prompt('Encrypt files in ' + path + '?', default='y', show_default=True, 
     print('Aborting...')
     exit()
 
-print('Compresing files...')
-
 mt = mt(path + '.tar.gz', path) # create tar.gz archive of target folder
 
 print('Encrypting files...')
