@@ -1,6 +1,10 @@
 import tarfile
-import os.path
+import os
 
 def make_tarfile(output_filename, source_dir):
+    print('Compressing files...')
     with tarfile.open(output_filename, "w:gz") as tar:
-        tar.add(source_dir, arcname=os.path.basename(source_dir))
+        for fn in os.listdir(source_dir):
+            p = os.path.join(source_dir, fn)
+            tar.add(p, arcname=fn)
+    
