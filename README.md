@@ -2,7 +2,7 @@
 
 ## About
 
-Encrypt folders using Python technology without hussle.
+Encrypt folders using Symmetric Encryption (Fernet) technology without hussle.
 
 
 ![workflow](https://i.imgur.com/2BdiO5S.png)
