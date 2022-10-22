@@ -1,5 +1,4 @@
 import tarfile
-import sys
 
 def extract_tarfile(path):
     print('Extracting files...')
