@@ -43,7 +43,7 @@ encrypted = key.encrypt(data)
 with open(path + '.tar.gz', 'wb') as f:
     f.write(encrypted)
 
-# delete original folder
+os.rename(path + '.tar.gz', path + '.secured.tar.gz')
 try:
     files = glob.glob(path + '/*')
     for file in files:
