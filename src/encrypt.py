@@ -1,57 +1,51 @@
 import sys
 import os
-from click import prompt
 from cryptography.fernet import Fernet
 from make_tarfile import make_tarfile as mt
 import glob 
 
-fkeypath = None
+def encrypt(folderpath, keypath=None):
 
-if len(sys.argv) > 2:
-    fkeypath = open(sys.argv[2], 'rb').read() # read key from file
+    fkeypath = None
 
-path = sys.argv[1] # path to target folder
+    if keypath:
+        fkeypath = keypath
 
-print(os.listdir(path)) # list contents of target folder
+    path = folderpath
 
-# prompt confirmation to encrypt
-if not prompt('Encrypt files in ' + path + '?', default='y', show_default=True, type=bool):
-    print('Aborting...')
-    exit()
+    mt(path + '.tar.gz', path) # create tar.gz archive of target folder
 
-mt = mt(path + '.tar.gz', path) # create tar.gz archive of target folder
-
-print('Encrypting files...')
+    print('Encrypting files...')
 
 
-with open(path + '.tar.gz', 'rb') as f:
-    data = f.read()
-    
-    
-if not fkeypath:
-    fkey = Fernet.generate_key() # create Fernet object
-    # save key to file
-    with open(path + '.key', 'wb') as f:
-        f.write(fkey)
-else:
-    fkey = fkeypath
+    with open(path + '.tar.gz', 'rb') as f:
+        data = f.read()
+        
+        
+    if not fkeypath:
+        fkey = Fernet.generate_key() # create Fernet object
+        # save key to file
+        with open(path + '.key', 'wb') as f:
+            f.write(fkey)
+    else:
+        fkey = fkeypath
 
-key = Fernet(fkey) # create Fernet object
+    key = Fernet(fkey) # create Fernet object
 
-encrypted = key.encrypt(data)
+    encrypted = key.encrypt(data)
 
-with open(path + '.tar.gz', 'wb') as f:
-    f.write(encrypted)
+    with open(path + '.tar.gz', 'wb') as f:
+        f.write(encrypted)
 
-os.rename(path + '.tar.gz', path + '.secured.tar.gz')
-try:
-    files = glob.glob(path + '/*')
-    for file in files:
-        os.remove(file)
-    os.rmdir(path)
-except Exception as e:
-    print("Unable to delete folder: " + str(e))
+    os.rename(path + '.tar.gz', path + '.secured.tar.gz')
+    try:
+        files = glob.glob(path + '/*')
+        for file in files:
+            os.remove(file)
+        os.rmdir(path)
+    except Exception as e:
+        print("Unable to delete folder: " + str(e))
 
-f.close()
+    f.close()
 
-print('Done! \nEncrypted files are in ' + path + '.tar.gz')
+    print('Done! \nEncrypted files are in ' + path + '.tar.gz')
