@@ -200,3 +200,6 @@ cython_debug/
 
 # VSCODE
 .vscode
+
+# TEST folder
+test/
