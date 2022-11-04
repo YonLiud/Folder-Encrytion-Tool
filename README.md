@@ -1,4 +1,4 @@
-# LFES- Light Folder Encryption System
+# FET - Folder Encryption Tool
 
 ## About
 

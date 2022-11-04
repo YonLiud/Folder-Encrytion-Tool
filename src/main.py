@@ -101,7 +101,7 @@ def main():
     tk.Button(window, text='Encrypt Folder', command=encrypt_folder).pack()
     tk.Button(window, text='Decrypt Folder', command=decrypt_folder).pack()
     
-    tk.Label(window, text='Source at https://github.com/YonLiud/Light-Folder-Encrytion-System', fg="grey").pack(side='bottom')
+    tk.Label(window, text='Source at https://github.com/YonLiud/Folder-Encrytion-Tool', fg="grey").pack(side='bottom')
     tk.Label(window, text='Made by Yonchukku Development [https://yonchukku.dev] ', fg='grey').pack(side='bottom')
     window.mainloop()
     
