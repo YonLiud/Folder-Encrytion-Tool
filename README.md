@@ -7,20 +7,17 @@ Encrypt folders using Symmetric Encryption (Fernet) technology without hussle.
 
 ![workflow](https://i.imgur.com/2BdiO5S.png)
 
-## Example:
+## Usage:
 
-### Encryption
-
-```shell
-$ python3 src\encrypt.py test\private\
+```bash
+$ python3 src\\main.py
 ```
-_Encryption is possible for multiple files using the same key by:_
 
-**_$ python3 src\encrypt.py test\private\ test\private.key_**
+and follow the instructions on the screen.
 
-_the key must be compatible with Fernet's encryption_
-### Decryption
+# Notes:
+Encryption and Decryption are not reversible. So, make sure you have a backup of your files before you encrypt them.
 
-```shell
-$ python3 src\decrypt.py test\private.secured.tar.gz test\private.key
-```
+You cannot recover your files if the exact file is not used for decryption.
+
+If you don't want/have an existing key for encryption, LFES can generate one for you upon encryption.
