@@ -12,8 +12,10 @@ def decrypt(path, keypath):
 
     with open(path, 'rb') as f:
         data = f.read()
-
-    decrypted = fkey.decrypt(data)
+    try:
+        decrypted = fkey.decrypt(data)
+    except Exception as e:
+        raise e
 
     with open(path, 'wb') as f:
         f.write(decrypted)
