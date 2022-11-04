@@ -18,8 +18,6 @@ def decrypt(path, keypath):
     with open(path, 'wb') as f:
         f.write(decrypted)
 
-    print('Decompressing files...')
-
     et(path)
 
     # delete archive
@@ -30,4 +28,4 @@ def decrypt(path, keypath):
     new_name = fname[:-8]
     os.rename(path[:-7], path[:-7][:-8])
     
-    print('\nDecrypted files are in ' + path[:-7])
+    return path[:-7][:-8]

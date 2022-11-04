@@ -15,9 +15,6 @@ def encrypt(folderpath, keypath=None):
 
     mt(path + '.tar.gz', path) # create tar.gz archive of target folder
 
-    print('Encrypting files...')
-
-
     with open(path + '.tar.gz', 'rb') as f:
         data = f.read()
         
@@ -28,9 +25,12 @@ def encrypt(folderpath, keypath=None):
         with open(path + '.key', 'wb') as f:
             f.write(fkey)
     else:
-        fkey = fkeypath
+        with open(fkeypath, 'rb') as f:
+            fkey = f.read()
+        
 
-    key = Fernet(fkey) # create Fernet object
+    key = Fernet(fkey)
+    
 
     encrypted = key.encrypt(data)
 
@@ -44,8 +44,8 @@ def encrypt(folderpath, keypath=None):
             os.remove(file)
         os.rmdir(path)
     except Exception as e:
-        print("Unable to delete folder: " + str(e))
+        raise e
 
     f.close()
 
-    print('Done! \nEncrypted files are in ' + path + '.tar.gz')
+    return str(path + '.tar.gz')

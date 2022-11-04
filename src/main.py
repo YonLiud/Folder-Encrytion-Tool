@@ -9,12 +9,10 @@ from tkinter import messagebox
 def main():
     # basic tkinter window
     window = tk.Tk()
-    window.minsize(500, 300)
+    window.minsize(200, 200)
     # open window in center of screen
     
     window.title('Folder Encryption Tool')
-
-    
     
     def encrypt_folder():
         
@@ -47,11 +45,20 @@ def main():
                     messagebox.showinfo('New key', 'A new key will be created')
                     key = None
                     break
+            else:
+                break
     
         
-        encrypt(folder, key)
+        try:
+            newpath = encrypt(folder, key)
+            messagebox.showinfo('Success', 'Folder encrypted successfully in ' + str(newpath))
+        except Exception as e:
+            messagebox.showerror('Error', 'Error: ' + str(e))
+            messagebox.showwarning('Error', 'An error has occured, please try again')
         encwindow.destroy()
         window.deiconify()
+            
+        
 
     def decrypt_folder():
         window.withdraw()
@@ -82,14 +89,20 @@ def main():
                 break
         
         
-        decrypt(folder, key)
+        try:
+            newpath = decrypt(folder, key)
+            messagebox.showinfo('Success', 'Folder decrypted successfully in ' + str(newpath))
+        except Exception as e:
+            messagebox.showerror('Error', 'Error: ' + str(e))
+            messagebox.showwarning('Error', 'An error has occured, please try again')
         decwindow.destroy()
         window.deiconify()
-        
         
     tk.Button(window, text='Encrypt Folder', command=encrypt_folder).pack()
     tk.Button(window, text='Decrypt Folder', command=decrypt_folder).pack()
     
+    tk.Label(window, text='Source at https://github.com/YonLiud/Light-Folder-Encrytion-System', fg="grey").pack(side='bottom')
+    tk.Label(window, text='Made by Yonchukku Development [https://yonchukku.dev] ', fg='grey').pack(side='bottom')
     window.mainloop()
     
 if __name__ == '__main__':
